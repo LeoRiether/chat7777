@@ -47,7 +47,7 @@ let app = (function(doc) {
     nameNode.appendChild(doc.createTextNode(data.user + ': '));
     node.appendChild(nameNode);
     let contentNode = doc.createElement('span');
-    contentNode.innerHTML = markdown.renderInline(data.content); // RIP efficiency
+    contentNode.innerHTML = markdown.renderInline(data.msg); // RIP efficiency...
     node.appendChild(contentNode);
     dom.messages.appendChild(node);
     scrollToBot();
@@ -69,9 +69,6 @@ let app = (function(doc) {
   
   // Websocket stuff
   let Conn = {
-    get isOpen() {
-      return this.c && this.c.readyState !== this.c.CLOSED;
-    },
     open() {
       this.c = new WebSocket(`wss://${window.location.host}/ws`);
       this.c.onopen = this.onOpen.bind(this);
@@ -91,6 +88,7 @@ let app = (function(doc) {
     },
     onClose() {
       chatLog("[WS] Connection closed... Attempting to open again");
+      clearInterval(this.pingInterval);
       this.open();
     },
 
@@ -110,10 +108,10 @@ let app = (function(doc) {
     dom.inputMessage.value = '';
     Conn.send(JSON.stringify({
       user: user,
-      content: msg
+      msg: msg
     }));
 
-    apiEmit();
+    apiEmit('send', { user, msg });
   }
 
   
