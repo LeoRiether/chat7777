@@ -51,5 +51,3 @@ class App < NYNY::App
     end
   end
 end
-
-App.run!
