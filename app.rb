@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra-websocket'
 
+set :sockets, []
+
 get '/' do
   erb :index
 end
