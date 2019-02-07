@@ -47,7 +47,7 @@ let app = (function(doc) {
     nameNode.appendChild(doc.createTextNode(data.user + ': '));
     node.appendChild(nameNode);
     let contentNode = doc.createElement('span');
-    contentNode.innerHTML = markdown.render(data.content); // RIP efficiency
+    contentNode.innerHTML = markdown.renderInline(data.content); // RIP efficiency
     node.appendChild(contentNode);
     dom.messages.appendChild(node);
     scrollToBot();
