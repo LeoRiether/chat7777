@@ -1,4 +1,4 @@
-source 'https://rubygems.org' 
+source 'https://rubygems.org'
 
 gem 'sinatra', '>= 2.0.5'
 gem 'sinatra-websocket', '>= 0.3.1'
