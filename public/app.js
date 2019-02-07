@@ -72,7 +72,7 @@ let app = (function(doc) {
     dom.inputMessage.value = '';
     conn.send(JSON.stringify({
       user: user,
-      msg: msg
+      content: msg
     }));
   }
 
