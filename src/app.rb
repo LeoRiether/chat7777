@@ -24,11 +24,11 @@ class App < NYNY::App
     render 'src/views/index.erb'
   end
 
-  get '/ws' do |env|
+  get '/ws' do
     puts env
     # totally not copied from the github example
-    if Faye::WebSocket.websocket?(env)
-      ws = Faye::WebSocket.new(env)
+    if Faye::WebSocket.websocket?(request)
+      ws = Faye::WebSocket.new(request)
       @clients << ws
   
       ws.on :message do |event|
