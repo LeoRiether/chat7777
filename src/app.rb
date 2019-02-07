@@ -25,7 +25,6 @@ class App < NYNY::App
   end
 
   get '/ws' do
-    puts env
     # totally not copied from the github example
     if Faye::WebSocket.websocket?(request)
       ws = Faye::WebSocket.new(request)
