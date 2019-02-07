@@ -3,10 +3,7 @@ require 'faye/websocket'
 require './src/helpers/mime.rb'
 
 class App < NYNY::App
-  def initialize()
-    super()
-    @clients = Array.new
-  end
+  @@clients = Array.new
 
   get '/public/*path' do
     path = request.path[1..-1]
@@ -30,16 +27,17 @@ class App < NYNY::App
     # totally not copied from the github example
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env)
-      @clients << ws
+
+      @@clients << ws
   
       ws.on :message do |event|
-        @clients.each do |c|
+        @@clients.each do |c|
           c.send(event.data)
         end
       end
   
       ws.on :close do |event|
-        @clients.delete ws
+        @@clients.delete ws
         ws = nil
       end
   
