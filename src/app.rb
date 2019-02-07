@@ -23,30 +23,31 @@ class App < NYNY::App
 
   get '/ws' do
     env = request.instance_variable_get(:@env)
+    "aaaargh"
 
-    # totally not copied from the github example
-    if Faye::WebSocket.websocket?(env)
-      ws = Faye::WebSocket.new(env)
+    # # totally not copied from the github example
+    # if Faye::WebSocket.websocket?(env)
+    #   ws = Faye::WebSocket.new(env)
 
-      @@clients << ws
+    #   @@clients << ws
   
-      # ws.on :message do |event|
-      #   @@clients.each do |c|
-      #     c.send(event.data)
-      #   end
-      # end
+    #   # ws.on :message do |event|
+    #   #   @@clients.each do |c|
+    #   #     c.send(event.data)
+    #   #   end
+    #   # end
   
-      # ws.on :close do |event|
-      #   @@clients.delete ws
-      #   ws = nil
-      # end
+    #   # ws.on :close do |event|
+    #   #   @@clients.delete ws
+    #   #   ws = nil
+    #   # end
   
-      # Return async Rack response
-      ws.rack_response  
-    else
-      # Normal HTTP request
-      status 404
-      "Not Found. You should probably use the WebSocket protocol for this"
-    end
+    #   # Return async Rack response
+    #   ws.rack_response  
+    # else
+    #   # Normal HTTP request
+    #   status 404
+    #   "Not Found. You should probably use the WebSocket protocol for this"
+    # end
   end
 end
