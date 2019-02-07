@@ -65,8 +65,8 @@ let app = (function(doc) {
   let conn;
   
   function sendMessage() {
-    if (conn.readyStatus === undefined || conn.readyStatus === conn.CLOSED || conn.readyStatus === conn.CONNECTING) 
-      return chatLog('[WS] Connection is closed');
+    // if (conn.readyStatus === undefined || conn.readyStatus === conn.CLOSED || conn.readyStatus === conn.CONNECTING) 
+    //   return chatLog('[WS] Connection is closed');
 
     let msg = dom.inputMessage.value.trim();
     dom.inputMessage.value = '';
@@ -89,20 +89,20 @@ let app = (function(doc) {
   dom.messages.addEventListener('scroll', onScroll);
 
   // Open websocket connection & bind events
-  (function openSocket() {
-    conn = new WebSocket(`wss://${window.location.host}/ws`);
-    conn.onopen = function () {
+  conn = (function openSocket() {
+    let c = new WebSocket(`wss://${window.location.host}/ws`);
+    c.onopen = function () {
       chatLog("[WS] Connection is now open");
     };
-    conn.onmessage = function (res) {
+    c.onmessage = function (res) {
       let data = JSON.parse(res.data);
       if (data)
         chatAppend(data);
     };
-    conn.onclose = function () {
-      chatLog("[WS] Connection closed. Attempting to re-open");
-      setTimeout(openSocket, 5000);
+    c.onclose = function () {
+      chatLog("[WS] Connection closed!");
     };
+    return c;
   })();
 
 })(document);
