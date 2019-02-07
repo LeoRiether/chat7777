@@ -25,9 +25,11 @@ class App < NYNY::App
   end
 
   get '/ws' do
+    env = request.instance_variable_get(:@env)
+
     # totally not copied from the github example
-    if Faye::WebSocket.websocket?(request)
-      ws = Faye::WebSocket.new(request)
+    if Faye::WebSocket.websocket?(env)
+      ws = Faye::WebSocket.new(env)
       @clients << ws
   
       ws.on :message do |event|
