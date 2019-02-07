@@ -30,16 +30,16 @@ class App < NYNY::App
 
       @@clients << ws
   
-      ws.on :message do |event|
-        @@clients.each do |c|
-          c.send(event.data)
-        end
-      end
+      # ws.on :message do |event|
+      #   @@clients.each do |c|
+      #     c.send(event.data)
+      #   end
+      # end
   
-      ws.on :close do |event|
-        # @@clients.delete ws
-        ws = nil
-      end
+      # ws.on :close do |event|
+      #   @@clients.delete ws
+      #   ws = nil
+      # end
   
       # Return async Rack response
       ws.rack_response  
