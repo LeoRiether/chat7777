@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Pacifico');
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 1.75em 3em;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+.title {
+  text-align: center;
+  /* Yes, I'm using a cursive font, then a sans-serif font and then a serif one... sorry */
+  font: 3em 'Pacifico', 'Helvetica Neue', serif;
+  color: #282828;
+  margin: 0;
+}
+.chat7-1 { color: #525252; }
+.chat7-2 { color: #7d7d7d; }
+.chat7-3 { color: #a7a7a7; }
+.chat7-4 { color: #d2d2d2; }
+
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: thin solid #ccc;
+  border-radius: 6px;
+  box-shadow: 2px 2px 3em rgba(0,0,0,0.2);
+  margin-top: 1.75em;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 900px;
+  overflow: hidden;
+}
+
+
+.messages {
+  overflow-y: scroll;
+  flex: 1;
+}
+
+.msg {
+  position: relative;
+  padding: .75em 1em;
+  font: 1em 'Lato', 'Helvetica Neue', sans-serif;
+  border-bottom: thin solid #ccc;
+} 
+
+.info-message {
+  margin-left: 30px;
+}
+.info-icon {
+  position: absolute;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #1de2d5;
+  border-radius: 50%;
+  text-align: center;
+}
+.info-icon:before {
+  /* sorry for the shenanigans */
+  position: absolute;
+  content: "i";
+  font: 20px 'Pacifico', 'Helvetica Neue', serif;
+  color: white;
+  margin-top: -7px;
+  margin-left: -3px;
+}
+
+
+.input {
+  z-index: 3;
+  display: flex; /* EVERYTHING HAS TO BE FLEX */
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 0 1.5em rgba(0,0,0,0.15);
+  padding: 0;
+}
+
+.input-message {
+  font: 1em 'Lato', 'Helvetica Neue', sans-serif;
+  flex: 1;
+  padding: .75em 1em;
+  border: 0;
+  background-color: #1de2d5;
+  outline: none;
+}
+
+.send-button {
+  position: relative;
+  width: 40px;
+  border: 0;
+  background: #128d85;
+  outline: 0;
+}
+.send-button svg {
+  width: 24px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+.send-button:active svg {
+  transform: rotate3d(1, -1, 0, 30deg) translate(-50%, -50%);
+}
+
