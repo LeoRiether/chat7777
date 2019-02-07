@@ -30,6 +30,12 @@ let app = (function(doc) {
     dom.messages.scrollTo(0,dom.messages.scrollHeight);
   }
 
+  let markdown = markdownit({
+    html: false,
+    linkify: true,
+    typographer:  false,
+  });
+
   function chatAppend(data) {
     // If only VueJS existed...
     // or mustachesjs
@@ -41,7 +47,7 @@ let app = (function(doc) {
     nameNode.appendChild(doc.createTextNode(data.user + ': '));
     node.appendChild(nameNode);
     let contentNode = doc.createElement('span');
-    contentNode.appendChild(doc.createTextNode(data.content));
+    contentNode.innerHTML = markdown.render(data.content); // RIP efficiency
     node.appendChild(contentNode);
     dom.messages.appendChild(node);
     scrollToBot();
@@ -106,6 +112,8 @@ let app = (function(doc) {
       user: user,
       content: msg
     }));
+
+    apiEmit();
   }
 
   
@@ -122,5 +130,23 @@ let app = (function(doc) {
 
   // Open websocket connection & bind events
   Conn.open();
+
+  // API
+  let apiListeners = {};
+
+  function apiEmit(e, data) {
+    if (!apiListeners[e]) return;
+    for (let fn of apiListeners[e]) {
+      fn(data);
+    }
+  }
+
+  return {
+    log: chatLog, 
+    listen(e, fn) {
+      apiListeners[e] = apiListeners[e] || [];
+      apiListeners[e].push(fn);
+    },
+  }
 
 })(document);
