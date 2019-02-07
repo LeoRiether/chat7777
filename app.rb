@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sinatra-websocket'
-require './src/helpers/mime.rb'
 
 get '/' do
   erb :index
