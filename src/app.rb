@@ -5,7 +5,7 @@ require './src/helpers/mime.rb'
 class App < NYNY::App
   def initialize()
     super()
-    @clients = []
+    @clients = Array.new
   end
 
   get '/public/*path' do
@@ -25,6 +25,7 @@ class App < NYNY::App
   end
 
   get '/ws' do |env|
+    puts env
     # totally not copied from the github example
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env)
@@ -37,7 +38,6 @@ class App < NYNY::App
       end
   
       ws.on :close do |event|
-        p [:close, event.code, event.reason]
         @clients.delete ws
         ws = nil
       end
