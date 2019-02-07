@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'nyny'
-gem 'faye/websocket'
+gem 'nyny', '>=3.4.3'
+gem 'faye-websocket', '>=0.10.7'
