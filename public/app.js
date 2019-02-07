@@ -33,7 +33,7 @@ let app = (function(doc) {
   let markdown = markdownit({
     html: false,
     linkify: true,
-    typographer:  false,
+    typographer:  true,
   });
 
   function chatAppend(data) {
