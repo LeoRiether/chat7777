@@ -78,6 +78,7 @@ DEPENDENCIES
   rack (>= 1.6.11)
   sinatra (>= 2.0.5)
   sinatra-websocket (>= 0.3.1)
+  thin (>= 1.7.2)
 
 BUNDLED WITH
    1.17.0
