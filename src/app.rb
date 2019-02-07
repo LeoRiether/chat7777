@@ -37,7 +37,7 @@ class App < NYNY::App
       end
   
       ws.on :close do |event|
-        @@clients.delete ws
+        # @@clients.delete ws
         ws = nil
       end
   
