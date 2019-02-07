@@ -88,6 +88,10 @@ let app = (function(doc) {
       this.open();
     },
 
+    send(data) {
+      this.c.send(data);
+    },
+
     ping() {
       this.c.send("ping");
     }
