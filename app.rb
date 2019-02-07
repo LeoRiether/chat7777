@@ -16,10 +16,14 @@ get '/ws' do
         settings.sockets << ws
       end
       ws.onmessage do |msg|
-        EM.next_tick do 
-          settings.sockets.each do |s|
-            s.send(msg)
-          end 
+        if msg == 'ping'
+          ws.send 'pong'
+        else
+          EM.next_tick do 
+            settings.sockets.each do |s|
+              s.send(msg)
+            end 
+          end
         end
       end
       ws.onclose do

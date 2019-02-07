@@ -71,6 +71,9 @@ let app = (function(doc) {
       this.c.onopen = this.onOpen.bind(this);
       this.c.onmessage = this.onMessage.bind(this);
       this.c.onclose = this.onClose.bind(this);
+
+      // Sends a ping every 50 seconds to prevent heroku timeout
+      this.pingInterval = setInterval(this.ping, 50000);
     },
     onOpen() {
       chatLog("[WS] Connection is now open");
@@ -83,6 +86,10 @@ let app = (function(doc) {
     onClose() {
       chatLog("[WS] Connection closed... Attempting to open again");
       this.open();
+    },
+
+    ping() {
+      this.c.send("ping");
     }
   };
   
