@@ -1,8 +1,12 @@
 + icon
 + '<person> has joined!', '<person> has changed name to <person2>'
+  - server-side username management helps with this
 + Commands
   - /name => change name
   - /ping => send ping to websocket
+  - /clear => clears chat
+  - /
 + Notification when the user is mentioned
 + Highlight when the user is mentioned
 + Cookie authentication, server-side username management
++ Cookie-based username persistency

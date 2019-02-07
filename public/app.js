@@ -82,6 +82,8 @@ let app = (function(doc) {
       chatLog("[WS] Connection is now open");
     },
     onMessage(res) {
+      if (res.data === 'pong') return;
+
       let data = JSON.parse(res.data);
       if (data)
         chatAppend(data);
